@@ -23,7 +23,9 @@ export default class extends Loader {
 
           decoderPromise.then((audioBuffer) => {
             resolve(audioBuffer);
-          });
+          }, (error) => {
+              reject(error)
+            });
         });
 
         fr.addEventListener('error', (err) => {
