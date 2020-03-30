@@ -38,19 +38,14 @@ export default class {
 
     this.setStateChange(STATE_DECODING);
 
-    return new Promise((resolve, reject) => {
-      this.ac.decodeAudioData(
-        audioData,
-        (audioBuffer) => {
+    return new Promise(function (resolve, reject) {
+        this.ac.decodeAudioData(audioData).then((audioBuffer) => {
           this.audioBuffer = audioBuffer;
           this.setStateChange(STATE_FINISHED);
-
           resolve(audioBuffer);
-        },
-        (err) => {
-          reject(err);
-        },
-      );
-    });
+        }, (error) => {
+          reject(error);
+        })
+      });
   }
 }
